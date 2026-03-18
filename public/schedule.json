@@ -93,11 +93,11 @@
             },
             {
                 "interval_hours": "19-20",
-                "free": false
+                "free": true
             },
             {
                 "interval_hours": "20-21",
-                "free": false
+                "free": true
             }
         ]
     },
@@ -188,6 +188,18 @@
             {
                 "interval_hours": "15-16",
                 "free": true
+            },
+            {
+                "interval_hours": "16-17",
+                "free": true
+            },
+            {
+                "interval_hours": "19-20",
+                "free": true
+            },
+            {
+                "interval_hours": "20-21",
+                "free": true
             }
         ]
     },
@@ -209,6 +221,18 @@
             },
             {
                 "interval_hours": "15-16",
+                "free": true
+            },
+            {
+                "interval_hours": "16-17",
+                "free": true
+            },
+            {
+                "interval_hours": "19-20",
+                "free": true
+            },
+            {
+                "interval_hours": "20-21",
                 "free": true
             }
         ]

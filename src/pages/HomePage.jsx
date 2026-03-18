@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import '@/styles/HomePage.css'
 
-
 // Service steps data
 const SERVICE_STEPS = [
   {
@@ -26,21 +25,38 @@ const SERVICE_STEPS = [
   },
 ]
 
-// Helpers
+// --- Helpers (修复了 UTC 日期判断的 Bug) ---
+
+// 统一获取 UTC+8 的当前日期字符串 (格式: YYYY-MM-DD)
+function getUTC8DateStr() {
+  const nowUTC8 = new Date(Date.now() + 8 * 60 * 60 * 1000)
+  return nowUTC8.toISOString().slice(0, 10)
+}
+
 function formatMonthDay(dateStr) {
   const d = new Date(dateStr + 'T00:00:00')
   return d.toLocaleDateString('en-US', { month: 'short' })
 }
 
 function isToday(dateStr) {
-  return new Date().toISOString().slice(0, 10) === dateStr
+  return getUTC8DateStr() === dateStr
 }
 
 function isPastDay(dateStr) {
-  return dateStr < new Date().toISOString().slice(0, 10)
+  return dateStr < getUTC8DateStr()
 }
 
-// Sub-components
+// 你的 isTooSoon 逻辑是完全正确的
+function isTooSoon(dateStr, intervalHour) {
+  const nowUTC8 = new Date(Date.now() + 8 * 60 * 60 * 1000)
+  const todayUTC8 = nowUTC8.toISOString().slice(0, 10)
+  if (dateStr !== todayUTC8) return false
+  const currentHourUTC8 = nowUTC8.getUTCHours()
+  const startHour = parseInt(String(intervalHour).split('-')[0], 10)
+  return startHour - currentHourUTC8 < 2  // 距现在不足2小时（包含负数即已过去）则划掉
+}
+
+// --- Sub-components ---
 function DayColumn({ day }) {
   const dateNum = new Date(day.date + 'T00:00:00').getDate()
   const month   = formatMonthDay(day.date)
@@ -58,20 +74,38 @@ function DayColumn({ day }) {
         {day.interval.length === 0 ? (
           <span className="no-slots">—</span>
         ) : (
-          day.interval.map((slot) => (
-            <div
-              key={slot.interval_hours}
-              className={`slot ${slot.free ? 'free' : 'booked'}${past ? ' past' : ''}`}
-              title={slot.free ? `Available ${slot.interval_hours}:00` : 'Unavailable'}
-            >
-              {slot.interval_hours}
-            </div>
-          ))
+          day.interval.map((slot) => {
+            // 单独计算该 slot 是否距离现在不足2小时或已过去
+            const slotTooSoon = isTooSoon(day.date, slot.interval_hours)
+            
+            // 只要本身不空闲，或者时间太近/已过，就被视为不可预约 (加划线)
+            const effectivelyBooked = !slot.free || slotTooSoon
+            
+            // 【核心修改点】只要日期整天已过去，或者当天的这一个 slot 已过去/太近，就加上变淡灰的 past 样式
+            const isSlotPast = past || slotTooSoon
+
+            return (
+              <div
+                key={slot.interval_hours}
+                className={`slot ${effectivelyBooked ? 'booked' : 'free'}${isSlotPast ? ' past' : ''}`}
+                title={
+                  slotTooSoon
+                    ? 'Too close to book'
+                    : slot.free
+                    ? `Available ${slot.interval_hours}:00`
+                    : 'Unavailable'
+                }
+              >
+                {slot.interval_hours}
+              </div>
+            )
+          })
         )}
       </div>
     </div>
   )
 }
+
 
 // Main Component
 export default function HomePage() {
@@ -170,7 +204,7 @@ export default function HomePage() {
           </div>
           <div className="legend-item">
             <div className="legend-dot booked" />
-            已被预约或我有自己的事
+            已被预约 | 我有自己的事 | 时间太近了
           </div>
         </div>
 
