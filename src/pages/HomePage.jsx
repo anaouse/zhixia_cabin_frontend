@@ -21,11 +21,9 @@ const SERVICE_STEPS = [
   {
     num: '04',
     title: '一对一通话',
-    desc: '下单成功后我会在你希望聊天的前一天在淘宝上发送给你一个视频链接地址，到时候进入视频会议就可以愉快聊天啦，如果和电脑有关的内容，可以用电脑聊天，方便你投屏我直接指导',
+    desc: '下单成功后我会在淘宝上发送给你一个视频通话链接地址，到时候点击链接就可以愉快聊天啦，如果是和电脑有关的内容，可以用电脑聊天，方便你投屏我直接指导',
   },
 ]
-
-// --- Helpers (修复了 UTC 日期判断的 Bug) ---
 
 // 统一获取 UTC+8 的当前日期字符串 (格式: YYYY-MM-DD)
 function getUTC8DateStr() {
@@ -46,14 +44,13 @@ function isPastDay(dateStr) {
   return dateStr < getUTC8DateStr()
 }
 
-// 你的 isTooSoon 逻辑是完全正确的
 function isTooSoon(dateStr, intervalHour) {
   const nowUTC8 = new Date(Date.now() + 8 * 60 * 60 * 1000)
   const todayUTC8 = nowUTC8.toISOString().slice(0, 10)
   if (dateStr !== todayUTC8) return false
   const currentHourUTC8 = nowUTC8.getUTCHours()
   const startHour = parseInt(String(intervalHour).split('-')[0], 10)
-  return startHour - currentHourUTC8 < 2  // 距现在不足2小时（包含负数即已过去）则划掉
+  return startHour - currentHourUTC8 < 2  // 距现在不足2小时则划掉
 }
 
 // --- Sub-components ---
@@ -137,11 +134,12 @@ export default function HomePage() {
           欢迎找我咨询任何我可能了解的东西，或者和我聊天？？？
         </p>
         <p className="intro-body">
-          想使用AI编程？Vibe Coding？我可以手把手带你了解最基本的方法和原理，授人以渔
+          想使用AI编程自己实现日常需求？Vibe Coding？我可以手把手带你了解最基本的方法和原理，授人以渔
         </p>
         <p className="intro-body">
           点击下方我的社交媒体链接，看看我分享了什么内容，如果有任何你想进一步了解的东西都可以询问我
         </p>
+        
         <div className="social-links">
           <a href="https://space.bilibili.com/1640255193" className="social-link" target="_blank" rel="noopener noreferrer">Bilibili</a>
           <span className="social-sep">·</span>
@@ -154,11 +152,14 @@ export default function HomePage() {
       </section>
 
       {/* ── Service Section ── */}
-      <section className="section schedule-section hero-right">
+      <section className="section schedule-section">
         <div className="schedule-header">
           <h2 className="schedule-title">
             服务方式
           </h2>
+          <p className="intro-body">
+            我会尽全力满足你的需求，但还是要提醒一句，咨询服务，到头来是有可能无法帮你解决问题的，也许你更需要睡一觉醒来后勇敢地对自己生活负责......
+          </p>
         </div>
  
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem', marginBottom: '2.5rem' }}>
