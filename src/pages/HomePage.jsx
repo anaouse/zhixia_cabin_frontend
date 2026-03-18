@@ -1,6 +1,31 @@
 import { useEffect, useState } from 'react'
 import '@/styles/HomePage.css'
 
+
+// Service steps data
+const SERVICE_STEPS = [
+  {
+    num: '01',
+    title: '选好时段',
+    desc: '查看下方日程表，找到你想要的空闲时间，记下日期和时间。',
+  },
+  {
+    num: '02',
+    title: '前往我的淘宝店',
+    desc: '点击下方链接进入我的淘宝店，如果有明确目的，可以下单前先和我说希望了解什么东西，我认为可以帮助你的话再下单，避免下单后我无能为力只能退款了😭',
+  },
+  {
+    num: '03',
+    title: '备注你的需求',
+    desc: '下单时在备注栏写明你希望咨询的主题，以及你希望交流的时间段，比如3月18日的10到11点：3月18日10-11（只接受网站上日程表空闲的时候哦）'
+  },
+  {
+    num: '04',
+    title: '一对一通话',
+    desc: '下单成功后我会在你希望聊天的前一天在淘宝上发送给你一个视频链接地址，到时候进入视频会议就可以愉快聊天啦，如果和电脑有关的内容，可以用电脑聊天，方便你投屏我直接指导',
+  },
+]
+
 // Helpers
 function formatMonthDay(dateStr) {
   const d = new Date(dateStr + 'T00:00:00')
@@ -78,7 +103,7 @@ export default function HomePage() {
           欢迎找我咨询任何我可能了解的东西，或者和我聊天？？？
         </p>
         <p className="intro-body">
-          想使用AI编程？Vibe Coding？我可以手把手带你了解最基本的方法和原理
+          想使用AI编程？Vibe Coding？我可以手把手带你了解最基本的方法和原理，授人以渔
         </p>
         <p className="intro-body">
           点击下方我的社交媒体链接，看看我分享了什么内容，如果有任何你想进一步了解的东西都可以询问我
@@ -94,6 +119,43 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── Service Section ── */}
+      <section className="section schedule-section hero-right">
+        <div className="schedule-header">
+          <h2 className="schedule-title">
+            服务方式
+          </h2>
+        </div>
+ 
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem', marginBottom: '2.5rem' }}>
+          {SERVICE_STEPS.map(step => (
+            <div key={step.num} style={{ borderTop: '1px solid var(--pale-sage)', paddingTop: '1.2rem' }}>
+              <div style={{ fontFamily: 'var(--font-display)', fontSize: '2rem', fontWeight: 300, color: 'var(--pale-sage)', lineHeight: 1, marginBottom: '0.6rem' }}>
+                {step.num}
+              </div>
+              <div style={{ fontFamily: 'var(--font-label)', fontSize: '0.72rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--moss-mid)', marginBottom: '0.5rem' }}>
+                {step.title}
+              </div>
+              <p className="intro-body" style={{ fontSize: '0.92rem', lineHeight: 1.4 }}>
+                {step.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+ 
+        <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', flexWrap: 'wrap', paddingTop: '1.5rem', borderTop: '1px solid rgba(184,201,176,0.5)' }}>
+          <a
+            href="https://shop.taobao.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="slot free"
+            style={{ display: 'inline-block', padding: '0.65rem 1.8rem', fontSize: '0.72rem', letterSpacing: '0.12em', cursor: 'pointer', textDecoration: 'none', borderRadius: '3px', whiteSpace: 'nowrap' }}
+          >
+            前往淘宝店铺下单 →
+          </a>
+        </div>
+      </section>
+ 
       <section className="section schedule-section">
         <div className="schedule-header">
           <h2 className="schedule-title">
