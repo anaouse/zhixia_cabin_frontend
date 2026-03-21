@@ -99,6 +99,39 @@ body {
   margin: 0 auto;
 }
 
+/* ── Shared: overline label (used in intro & schedule) ── */
+.overline {
+  font-family: var(--font-label);
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fern);
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.overline::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--fern);
+  flex-shrink: 0;
+}
+
+/* intro overline has slightly more bottom margin */
+.intro-overline { margin-bottom: 1.5rem; }
+
+/* ── Shared: section title ── */
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  color: var(--moss-dark);
+}
+
 /* ============================================================
    INTRO SECTION
    ============================================================ */
@@ -107,35 +140,10 @@ body {
   padding-bottom: 20px;
 }
 
-.intro-overline {
-  font-family: var(--font-label);
-  font-size: 0.65rem;
-  font-weight: 400;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--fern);
-  margin-bottom: 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-}
-
-.intro-overline::before {
-  content: '';
-  display: block;
-  width: 32px;
-  height: 1px;
-  background: var(--fern);
-}
-
 .hero-title {
-  font-family: var(--font-display);
   font-size: clamp(2.6rem, 4.5vw, 3.8rem);
-  font-weight: 300;
   line-height: 1.12;
-  color: var(--moss-dark);
   margin-bottom: 1.8rem;
-  font-style: normal;
 }
 
 .green-word {
@@ -216,30 +224,8 @@ body {
   margin-bottom: 3rem;
 }
 
-.schedule-overline {
-  font-family: var(--font-label);
-  font-size: 0.62rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--fern);
-  margin-bottom: 0.8rem;
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-}
-
-.schedule-overline::before {
-  content: '';
-  width: 32px;
-  height: 1px;
-  background: var(--fern);
-}
-
 .schedule-title {
-  font-family: var(--font-display);
   font-size: clamp(1.8rem, 3vw, 2.6rem);
-  font-weight: 300;
-  color: var(--moss-dark);
   margin-bottom: 0.6rem;
 }
 
@@ -280,8 +266,13 @@ body {
   border-radius: 2px;
 }
 
-.legend-dot.free    { background: var(--fern); }
-.legend-dot.booked  { background: transparent; border: 1px solid var(--pale-sage); position: relative; overflow: hidden; }
+.legend-dot.free   { background: var(--fern); }
+.legend-dot.booked {
+  background: transparent;
+  border: 1px solid var(--pale-sage);
+  position: relative;
+  overflow: hidden;
+}
 .legend-dot.booked::after {
   content: '';
   position: absolute;
@@ -291,6 +282,10 @@ body {
   transform: translateY(-50%);
 }
 
+.legend-dot.past { 
+  background: var(--fern); 
+  opacity: 0.4; 
+}
 /* ── Calendar Grid ── */
 .calendar-grid {
   display: grid;
@@ -302,14 +297,13 @@ body {
   overflow: hidden;
 }
 
-/* Day column — 去掉整列 hover 背景变化 */
 .day-column {
   background: var(--cream);
   display: flex;
   flex-direction: column;
 }
 
-/* Day header — 默认（今天 & 未来） */
+/* ── Day headers (shared base) ── */
 .day-header {
   padding: 1rem 0.75rem 0.8rem;
   border-bottom: 1px solid rgba(184, 201, 176, 0.5);
@@ -317,17 +311,8 @@ body {
   text-align: center;
 }
 
-/* 已过去的日期表头：更暗淡，明显区分 */
-.day-header--past {
-  background: #e8e4db;
-  opacity: 0.55;
-}
-
-/* 今天的表头：绿色高亮 */
-.day-header--today {
-  background: rgba(107, 143, 94, 0.18);
-  opacity: 1;
-}
+.day-header--past  { background: #e8e4db; opacity: 0.55; }
+.day-header--today { background: rgba(107, 143, 94, 0.18); }
 
 .day-name {
   font-family: var(--font-label);
@@ -346,10 +331,7 @@ body {
   line-height: 1;
 }
 
-.day-date.today {
-  color: var(--moss-mid);
-  font-weight: 600;
-}
+.day-date.today { color: var(--moss-mid); font-weight: 600; }
 
 .day-month {
   font-family: var(--font-label);
@@ -359,7 +341,7 @@ body {
   margin-top: 0.15rem;
 }
 
-/* Slots container */
+/* ── Slots ── */
 .slots-container {
   padding: 0.75rem 0.6rem;
   display: flex;
@@ -378,14 +360,12 @@ body {
   text-transform: uppercase;
 }
 
-/* Slot pill */
 .slot {
   border-radius: 3px;
   padding: 0.35rem 0.5rem;
   font-family: var(--font-label);
   font-size: 0.62rem;
   letter-spacing: 0.06em;
-  font-weight: 400;
   text-align: center;
   transition: all 0.18s ease;
   cursor: default;
@@ -411,16 +391,8 @@ body {
   opacity: 0.7;
 }
 
-/* 已过去日期的 slot 整体更淡 */
-.slot.past {
-  opacity: 0.4;
-}
-
-.slot.past:hover {
-  opacity: 0.55;
-  transform: none;
-  box-shadow: none;
-}
+.slot.past { opacity: 0.4; }
+.slot.past:hover { opacity: 0.55; transform: none; box-shadow: none; }
 
 /* ── Loading / Error ── */
 .schedule-loading,
@@ -476,6 +448,7 @@ body {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-.hero-left   { animation: fadeUp 0.8s ease both; }
-.hero-right  { animation: fadeUp 0.8s 0.15s ease both; }
+.hero-left    { animation: fadeUp 0.8s ease both; }
+.hero-right   { animation: fadeUp 0.8s 0.15s ease both; }
 .schedule-section { animation: fadeUp 0.8s 0.3s ease both; }
+

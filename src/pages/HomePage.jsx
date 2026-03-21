@@ -75,10 +75,10 @@ function DayColumn({ day }) {
             // 单独计算该 slot 是否距离现在不足2小时或已过去
             const slotTooSoon = isTooSoon(day.date, slot.interval_hours)
             
-            // 只要本身不空闲，或者时间太近/已过，就被视为不可预约 (加划线)
-            const effectivelyBooked = !slot.free || slotTooSoon
+            // 【修改点】：只看原本是否空闲，不因为时间太近强加划线
+            const effectivelyBooked = !slot.free
             
-            // 【核心修改点】只要日期整天已过去，或者当天的这一个 slot 已过去/太近，就加上变淡灰的 past 样式
+            // 只要日期整天已过去，或者当天的这一个 slot 已过去/太近，就加上变淡灰的 past 样式
             const isSlotPast = past || slotTooSoon
 
             return (
@@ -102,7 +102,6 @@ function DayColumn({ day }) {
     </div>
   )
 }
-
 
 // Main Component
 export default function HomePage() {
@@ -128,7 +127,7 @@ export default function HomePage() {
           正在努力成为可以解答<span className="green-word">万物</span>的人......
         </h1>
         <p className="intro-body">
-          你好！你可以叫我徵（Zhi）夏，我没什么特别的，现在二十多岁，是一位普通人，小学到初中生活在乡镇，高中生活在小城市，大学生活在大城市，就读数据科学与大数据技术专业
+          你好！你可以叫我徵（zhǐ）夏，我没什么特别的，现在二十多岁，是一位普通人，小学到初中生活在乡镇，高中生活在小城市，大学生活在大城市，就读数据科学与大数据技术专业
         </p>
         <p className="intro-body">
           欢迎找我咨询任何我可能了解的东西，或者和我聊天？？？
@@ -201,11 +200,16 @@ export default function HomePage() {
         <div className="legend">
           <div className="legend-item">
             <div className="legend-dot free" />
-            空闲
+            空闲可约
           </div>
           <div className="legend-item">
             <div className="legend-dot booked" />
-            已被预约 | 我有自己的事 | 时间太近了
+            已被预约 | 我有自己的事
+          </div>
+          {/* 新增：解释变淡的颜色 */}
+          <div className="legend-item">
+            <div className="legend-dot past" />
+            已过去 | 距现在太近了
           </div>
         </div>
 
