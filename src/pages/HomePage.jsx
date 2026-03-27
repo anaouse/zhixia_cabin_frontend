@@ -140,7 +140,7 @@ export default function HomePage() {
         </div>
 
         <div className="cta-row">
-          <a href="https://shop.taobao.com" target="_blank" rel="noopener noreferrer" className="slot free cta">
+          <a href="https://m.tb.cn/h.i7IjK9sfBBC09PY" target="_blank" rel="noopener noreferrer" className="slot free cta">
             前往淘宝店铺下单 →
           </a>
         </div>
