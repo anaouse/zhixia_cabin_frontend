@@ -157,15 +157,15 @@
             },
             {
                 "interval_hours": "16-17",
-                "free": true
+                "free": false
             },
             {
                 "interval_hours": "19-20",
-                "free": true
+                "free": false
             },
             {
                 "interval_hours": "20-21",
-                "free": true
+                "free": false
             }
         ]
     },
