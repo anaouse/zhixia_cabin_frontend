@@ -15,6 +15,18 @@ const SOCIAL = [
   { label: 'GitHub', href: 'https://github.com/anaouse' },
 ]
 
+const taobaoText = `【淘宝】https://e.tb.cn/h.i8Zx9nSoXhEFj0L?tk=RpNS5YVIysg HU926 「对谈1小时」
+点击链接直接打开 或者 淘宝搜索直接打开`
+
+const handleCopy = async () => {
+  try {
+    await navigator.clipboard.writeText(taobaoText)
+    alert('已复制！请打开手机淘宝即可自动跳转')
+  } catch (err) {
+    alert('复制失败，请手动复制')
+  }
+}
+
 // UTC+8 helpers
 const nowUTC8 = () => new Date(Date.now() + 8 * 3600_000)
 const todayStr = () => nowUTC8().toISOString().slice(0, 10)
@@ -140,9 +152,21 @@ export default function HomePage() {
         </div>
 
         <div className="cta-row">
-          <a href="https://m.tb.cn/h.i7IjK9sfBBC09PY" target="_blank" rel="noopener noreferrer" className="slot free cta">
-            前往淘宝店铺下单 →
-          </a>
+          <div className="qr-box">
+            <img src="/zhixia_cabin_taobao.jpg" alt="淘宝扫码下单" className="qr-img" />
+
+            <p className="body-text sm">
+              使用手机淘宝扫码下单
+            </p>
+
+            <button className="copy-btn" onClick={handleCopy}>
+              复制淘口令打开淘宝
+            </button>
+
+            <p className="body-text sm muted">
+              复制后打开手机淘宝即可自动跳转
+            </p>
+          </div>
         </div>
       </section>
 
