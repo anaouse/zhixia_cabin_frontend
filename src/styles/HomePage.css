@@ -362,20 +362,25 @@ body {
   box-shadow: 0 2px 8px rgba(61,92,61,.25);
 }
 
-.slot.booked {
+/* ★ 修改部分：让 booked 和 past 拥有共同的基础划线外观 ★ */
+.slot.booked, 
+.slot.past {
   background: transparent;
   color: var(--pale-sage);
   border: 1px solid var(--pale-sage);
   text-decoration: line-through;
+}
+
+.slot.booked {
   opacity: .7;
 }
 
 .slot.past {
-  opacity: .4;
+  opacity: .35; /* 已经过去的时间让它比 booked 更浅一点 */
 }
 
 .slot.past:hover {
-  opacity: .55;
+  opacity: .5;
   transform: none;
   box-shadow: none;
 }

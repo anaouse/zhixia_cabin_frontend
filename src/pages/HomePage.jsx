@@ -21,7 +21,9 @@ const todayStr = () => nowUTC8().toISOString().slice(0, 10)
 
 function slotState(dateStr, slot) {
   const today = todayStr()
+  // 日期在今天之前，返回 past
   if (dateStr < today) return 'past'
+  // 日期是今天，且该时间段距离现在不足 2 小时，也返回 past
   if (dateStr === today) {
     const startHour = parseInt(String(slot.interval_hours).split('-')[0], 10)
     if (startHour - nowUTC8().getUTCHours() < 2) return 'past'
@@ -42,21 +44,28 @@ function DayColumn({ day }) {
         <div className="lbl sm">{d.toLocaleDateString('en-US', { month: 'short' })}</div>
       </div>
       <div className="slots">
-        {day.interval.length === 0
-          ? <span className="no-slot">—</span>
-          : day.interval.map(slot => {
-              const state = slotState(day.date, slot)
-              return (
-                <div
-                  key={slot.interval_hours}
-                  className={`slot ${state}`}
-                  title={state === 'past' ? 'Too close / past' : state === 'free' ? `Available ${slot.interval_hours}:00` : 'Unavailable'}
-                >
-                  {slot.interval_hours}
-                </div>
-              )
-            })
-        }
+        {day.interval.length === 0 ? (
+          <span className="no-slot">—</span>
+        ) : (
+          day.interval.map((slot) => {
+            const state = slotState(day.date, slot)
+            return (
+              <div
+                key={slot.interval_hours}
+                className={`slot ${state}`}
+                title={
+                  state === 'past'
+                    ? '已经过去或距离现在太近'
+                    : state === 'free'
+                    ? `可预约 ${slot.interval_hours}:00`
+                    : '已被预约'
+                }
+              >
+                {slot.interval_hours}
+              </div>
+            )
+          })
+        )}
       </div>
     </div>
   )
@@ -68,8 +77,14 @@ export default function HomePage() {
 
   useEffect(() => {
     fetch('/schedule.json')
-      .then(r => { if (!r.ok) throw new Error(); return r.json() })
-      .then(d => { setSchedule(d); setStatus('ok') })
+      .then((r) => {
+        if (!r.ok) throw new Error()
+        return r.json()
+      })
+      .then((d) => {
+        setSchedule(d)
+        setStatus('ok')
+      })
       .catch(() => setStatus('error'))
   }, [])
 
@@ -80,19 +95,27 @@ export default function HomePage() {
       </nav>
 
       <section className="sec intro">
-        <h1 className="large-title">正在努力成为可以解答<span className="accent">万物</span>的人......</h1>
+        <h1 className="large-title">
+          正在努力成为可以解答<span className="accent">万物</span>的人......
+        </h1>
         {[
           '你好！你可以叫我徵（zhǐ）夏，我没什么特别的，现在二十多岁，是一位普通人，小学到初中生活在乡镇，高中生活在小城市，大学生活在大城市，就读数据科学与大数据技术专业',
           '欢迎找我咨询任何我可能了解的东西，或者和我聊天？？？',
           '想使用AI编程自己实现日常需求？Vibe Coding？我可以手把手带你了解最基本的方法和原理，授人以渔',
           '点击下方我的社交媒体链接，看看我分享了什么内容，如果有任何你想进一步了解的东西都可以询问我',
-        ].map((t, i) => <p key={i} className="body-text">{t}</p>)}
+        ].map((t, i) => (
+          <p key={i} className="body-text">
+            {t}
+          </p>
+        ))}
 
         <div className="social-links">
           {SOCIAL.map(({ label, href }, i) => (
             <span key={label}>
               {i > 0 && <span className="sep">·</span>}
-              <a href={href} className="social-link" target="_blank" rel="noopener noreferrer">{label}</a>
+              <a href={href} className="social-link" target="_blank" rel="noopener noreferrer">
+                {label}
+              </a>
             </span>
           ))}
         </div>
@@ -101,7 +124,9 @@ export default function HomePage() {
       <section className="sec">
         <div className="sec-hd">
           <h2 className="sec-title">服务方式</h2>
-          <p className="body-text">我会尽全力满足你的需求，但还是要提醒一句，咨询服务，到头来是有可能无法帮你解决问题的，也许你更需要睡一觉醒来后勇敢地对自己生活负责......</p>
+          <p className="body-text">
+            我会尽全力满足你的需求，但还是要提醒一句，咨询服务，到头来是有可能无法帮你解决问题的，也许你更需要睡一觉醒来后勇敢地对自己生活负责......
+          </p>
         </div>
 
         <div className="steps-grid">
@@ -128,8 +153,8 @@ export default function HomePage() {
 
         <div className="legend">
           {[
-            { cls: 'free',   label: '空闲可约' },
-            { cls: 'booked', label: '已被预约 | 我有自己的事 | 距离现在太近了' },
+            { cls: 'free', label: '空闲可约' },
+            { cls: 'booked', label: '已被预约 | 我有自己的事 | 距离现在太近了 | 已经过去' },
           ].map(({ cls, label }) => (
             <div key={cls} className="legend-item">
               <div className={`legend-dot ${cls}`} />
@@ -139,10 +164,12 @@ export default function HomePage() {
         </div>
 
         {status === 'loading' && <div className="status-msg">Loading schedule…</div>}
-        {status === 'error'   && <div className="status-msg error">Could not load schedule. Please try again later.</div>}
+        {status === 'error' && <div className="status-msg error">Could not load schedule. Please try again later.</div>}
         {status === 'ok' && (
           <div className="cal-grid">
-            {schedule.map(day => <DayColumn key={day.date} day={day} />)}
+            {schedule.map((day) => (
+              <DayColumn key={day.date} day={day} />
+            ))}
           </div>
         )}
       </section>
