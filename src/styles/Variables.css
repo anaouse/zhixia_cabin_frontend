@@ -1,0 +1,35 @@
+/* 徵夏小屋 — 调色板，灵感源自森林木屋 */
+:root {
+  /* 主色 */
+  --color-wood: #C4956A;       /* 杉木暖棕 */
+  --color-bark: #7A5C3E;       /* 深木纹 */
+  --color-slate: #3D4F5C;      /* 窗框深灰蓝 */
+  --color-moss: #5C7358;       /* 苔藓绿 */
+
+  /* 背景/中性 */
+  --color-light: #FDF8F2;      /* 暖白底色 */
+  --color-mist: #E8E4DC;       /* 雾白/内墙色 */
+  --color-dusk: #8B9BAA;       /* 暮色天空（次要文字） */
+
+  /* 文字 */
+  --color-text: #2E2A25;       /* 深棕黑 */
+  --color-text-soft: #6B5F52;  /* 柔和次要文字 */
+
+  /* 功能色 */
+  --color-border: #D6CFC4;
+
+  /* 排版 */
+  --font-display: 'Noto Serif SC', 'Georgia', serif;
+  --font-body: 'Noto Sans SC', 'PingFang SC', sans-serif;
+
+  /* 间距节奏 */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 64px;
+
+  /* 圆角 */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+}
