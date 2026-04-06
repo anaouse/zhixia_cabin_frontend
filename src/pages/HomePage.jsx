@@ -3,7 +3,7 @@ import Footer from '@/components/Footer.jsx'
 import '@/styles/HomePage.css'
 
 const socialLinks = [
-  { name: 'BILIBILI', url: 'https://space.bilibili.com/youruid' },
+  { name: 'BILIBILI', url: 'https://space.bilibili.com/1640255193' },
   { name: '小红书', url: 'https://www.xiaohongshu.com/user/profile/68c04e3f0000000005001821' },
   { name: '抖音', url: 'https://v.douyin.com/hF7motm8i7I/ 5@3.com' },
   { name: 'Github', url: 'https://github.com/anaouse' },
