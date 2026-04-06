@@ -9,9 +9,8 @@ export default function HomePage() {
     <div className="page">
       <Header />
       <main className="page-main">
-        <section className="home-hero">
-          <h1 className="home-hero__title">徵夏小屋</h1>
-          <p className="home-hero__subtitle">一个安静存在于网络角落的地方</p>
+        <section className="home">
+          <h1 className="home__title">徵夏小屋</h1>
         </section>
         <section className="home-content">
           {homeContent.map((block, i) => (

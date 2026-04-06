@@ -14,12 +14,12 @@
   box-sizing: border-box;
 }
 
-.home-hero {
+.home {
   padding-bottom: var(--space-xl);
   font-family: var(--font-display);
 }
 
-.home-hero__title {
+.home__title {
   margin: 0 0 var(--space-md);
   font-size: 2.5rem;
   font-weight: 600;
@@ -27,7 +27,7 @@
   letter-spacing: 0.06em;
 }
 
-.home-hero__subtitle {
+.home__subtitle {
   margin: 0;
   font-size: 1rem;
   color: var(--color-dusk);

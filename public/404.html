@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      // 把路径编码后重定向到首页
+      var path = window.location.pathname;
+      window.location.replace(
+        '/?p=' + encodeURIComponent(path)
+      );
+    </script>
+  </head>
+</html>
