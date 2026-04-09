@@ -7,7 +7,7 @@
 
 .page-main {
   flex: 1;
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: var(--space-xl) var(--space-lg);
   width: 100%;
@@ -45,7 +45,7 @@
   font-size: 1rem;
   color: var(--color-moss);
   line-height: 1.75;
-  margin: 0;
+  margin: 0.5;
 }
 
 .social-list {
@@ -69,4 +69,30 @@
 
 .social-list__link:hover {
   border-bottom-color: var(--color-moss);
+}
+
+/* Container for the list to ensure proper spacing */
+.content-list {
+  list-style: none; /* We will use a custom bullet for a cleaner look */
+  margin: var(--space-md) 0;
+  padding: 0;
+}
+
+.content-list__item {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-moss);
+  line-height: 1.75;
+  margin-bottom: var(--space-xs);
+  position: relative;
+  padding-left: 1.5rem; /* Space for the custom bullet */
+}
+
+/* Custom bullet point using a simple dash or dot */
+.content-list__item::before {
+  content: "—"; 
+  position: absolute;
+  left: 0;
+  color: var(--color-bark); /* Accent color for the bullet */
+  font-weight: bold;
 }

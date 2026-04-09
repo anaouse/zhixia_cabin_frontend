@@ -4,7 +4,9 @@ import '@/styles/Header.css'
 const navItems = [
   { label: '首页', path: '/' },
   { label: '咨询服务', path: '/consult' },
-  { label: '个人看板', path: '/zhixia-terminal' },
+  { label: '20-内容目录', path: '/contents' },
+
+  // { label: '个人看板', path: '/zhixia-terminal' },
   { label: '我的店铺', path: '/shop' },
 ]
 

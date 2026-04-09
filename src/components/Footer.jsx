@@ -6,7 +6,7 @@ export default function Footer() {
 
   return (
     <footer className="footer">
-      <p className="footer-text">徵夏小屋</p>
+      <p className="footer-text">徵夏小屋 | zhixiacabin.xyz</p>
       <p className="footer-date">2026.04.03 - {today}</p>
     </footer>
   )

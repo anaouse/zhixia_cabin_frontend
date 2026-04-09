@@ -1,0 +1,63 @@
+/* 分类折叠外壳 */
+.category-item {
+  margin-bottom: var(--space-lg);
+  border-left: 2px solid var(--color-bark); /* 左侧装饰线 */
+  padding-left: var(--space-md);
+}
+
+.category-item__summary {
+  list-style: none;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--color-bark);
+  padding: var(--space-xs) 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.category-item__summary::-webkit-details-marker {
+  display: none;
+}
+
+.category-item__summary:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px; /* 控制下划线的距离 */
+}
+
+/* 链接列表样式 */
+.content-link-list {
+  list-style: none;
+  margin: var(--space-sm) 0 0 0;
+  padding: 0;
+}
+
+.content-link-list__item {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: var(--space-sm);
+}
+
+.content-link-list__item::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--color-bark);
+  font-weight: bold;
+}
+
+.content-link-list__link {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-moss);
+  text-decoration: none;
+  transition: color 0.2s ease, border-bottom 0.2s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.content-link-list__link:hover {
+  color: var(--color-bark);
+  border-bottom-color: var(--color-bark);
+}

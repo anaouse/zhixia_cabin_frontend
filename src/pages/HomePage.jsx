@@ -23,7 +23,7 @@ export default function HomePage() {
           <div className="content-block">
             <h2 className="content-block__heading">关于徵夏小屋</h2>
             <p className="content-block__body">
-              你好！可以叫我徵（zhǐ）夏，徵夏小屋用于存放我个人的产品，欢迎在各大自媒体平台了解我发布的内容以及购买我的产品
+              你好！可以叫我徵（zhǐ）夏，徵夏小屋用于存放我个人的产品，欢迎在各大自媒体平台了解我发布的内容以及到我的店铺购买我的产品。
             </p>
           </div>
 
