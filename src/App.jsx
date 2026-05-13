@@ -3,6 +3,7 @@ import HomePage from '@/pages/HomePage.jsx'
 import ShopPage from '@/pages/ShopPage.jsx'
 import ConsultPage from '@/pages/ConsultPage.jsx'
 import ContentsPage from '@/pages/ContentsPage.jsx'
+import SourcePage from '@/pages/SourcePage.jsx'
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
         <Route path="/contents" element={<ContentsPage />} />
 
         <Route path="/shop" element={<ShopPage />} />
+        <Route path="/source" element={<SourcePage />} />
       </Routes>
     </BrowserRouter>
   )

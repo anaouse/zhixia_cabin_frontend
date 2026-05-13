@@ -1,0 +1,89 @@
+.source {
+  padding-bottom: var(--space-xl);
+}
+
+.source__title {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--color-bark);
+  letter-spacing: 0.06em;
+  margin: 0 0 var(--space-md);
+}
+
+.source__intro {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-moss);
+  line-height: 1.75;
+  margin: 0 0 var(--space-xl);
+}
+
+.source-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  padding: var(--space-lg);
+  background: var(--color-mist);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  flex-wrap: wrap;
+}
+
+.source-card__info {
+  flex: 1;
+  min-width: 240px;
+}
+
+.source-card__name {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-bark);
+  margin: 0 0 var(--space-sm);
+}
+
+.source-card__desc {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--color-text-soft);
+  line-height: 1.65;
+  margin: 0;
+}
+
+.source-card__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-sm);
+  flex-shrink: 0;
+}
+
+.source-card__format {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--color-dusk);
+  letter-spacing: 0.04em;
+}
+
+.source-card__download-btn {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--color-light);
+  background: var(--color-wood);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: var(--space-sm) var(--space-lg);
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: background 0.2s ease;
+}
+
+.source-card__download-btn:hover {
+  background: var(--color-bark);
+}
+
+.source-card__download-btn:active {
+  background: var(--color-slate);
+}
